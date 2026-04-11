@@ -37,7 +37,7 @@ Prices listed are as of this writing. Basically, while there are devices out the
 | Component      | Component Pin | WT32-ETH01 Pin | Note                                   |
 | -------------- | ------------- | -------------- | -------------------------------------- |
 | OLED           | SDA           | IO14           | Data                                   |
-| OLED           | SCL           | IO15           | Clock                                  |
+| OLED           | SCK           | IO15           | Clock                                  |
 | OLED           | VCC           | 3V3            | Power for display                      |
 | OLED           | GND           | GND            | Ground for display                     |
 | Button         | One Pin       | IO35           | Push to reset testing                  |
