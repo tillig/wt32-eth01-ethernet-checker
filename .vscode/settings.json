@@ -2,5 +2,6 @@
   "cSpell.words": [
     "adafruit",
     "oled"
-  ]
+  ],
+  "markdown.extension.toc.levels": "2..6"
 }

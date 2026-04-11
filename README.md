@@ -10,6 +10,18 @@ When you plug it in, it will test...
 
 If any of those things fail, it'll tell you which one.
 
+- [Parts](#parts)
+- [Hardware Wiring (Production)](#hardware-wiring-production)
+- [Hardware Wiring (Programming)](#hardware-wiring-programming)
+- [Programming](#programming)
+- [Breadboard and Testing](#breadboard-and-testing)
+  - [The "Combined" Breadboard Strategy](#the-combined-breadboard-strategy)
+  - [Step-by-Step Programming Process](#step-by-step-programming-process)
+  - [Transitioning to Testing](#transitioning-to-testing)
+  - [Testing the "Production" Power](#testing-the-production-power)
+  - [Summary Checklist for Success](#summary-checklist-for-success)
+- [References](#references)
+
 ## Parts
 
 - [WT32-ETH01](https://amzn.to/4bPwoAS) - $17
@@ -23,7 +35,7 @@ Prices listed are as of this writing. Basically, while there are devices out the
 ## Hardware Wiring (Production)
 
 | Component    | Pin A    | Pin B   | Notes               |
-| :----------- | :------- | :------ | :------------------ |
+| ------------ | -------- | ------- | ------------------- |
 | USB-C Power  | VCC (5V) | 5V Pin  | Main Power          |
 | USB-C Power  | GND      | GND Pin | Ground              |
 | 0.91" OLED   | SDA      | IO33    | I2C Data            |
@@ -46,7 +58,7 @@ Pin connections for USB programmer:
 | RXD            | TXD        |
 | 3.3V           | 3V3        |
 
-## Programming Instructions
+## Programming
 
 This project is done with [VS Code and PlatformIO](https://docs.platformio.org/en/latest/integration/ide/vscode.html).
 
@@ -54,6 +66,55 @@ This project is done with [VS Code and PlatformIO](https://docs.platformio.org/e
 2. Connect it via USB to your computer.
 3. Open in VS Code/PlatformIO and click **Upload**.
 4. Remove the downloader and connect the components for standalone USB-C operation.
+
+## Breadboard and Testing
+
+When you're going from "trying things out" to "wired for production" here are some instructions to help get there.
+
+### The "Combined" Breadboard Strategy
+
+All of the components - the production components and the downloader - should all be wired up to the appropriate pins on the WT32 via the breadboard. To keep everything connected safely, follow these rules:
+
+- Shared ground: All components (WT32, OLED, Button, USB-C, and Downloader) must share the same GND rail on your breadboard.
+- The power rule: Only connect one 5V source at a time.
+- While programming: Plug in the ESP 32 downloader. Leave the USB-C cable unplugged.
+- While testing "Production": Unplug the Downloader (or its USB cable) and plug in the USB-C breakout.
+
+### Step-by-Step Programming Process
+
+1. Clone the code from the repo.
+2. Plug the ESP32 downloader into your computer (this powers the board).
+3. In VS Code, click the "PlatformIO: Upload" icon (the right-pointing arrow) in the bottom status bar.
+
+Watch the terminal. You should see Writing at 0x00001000... and a percentage climb. At the end you should see a "success" message.
+
+### Transitioning to Testing
+
+The WT32-ETH01 does not have a reset button. To run testing, you will have to cycle power (unplug/plug it back into USB power) or push the button to start the test again.
+
+The OLED should light up and display "ETHERNET: Negotiating DHCP..."
+
+Plug in an Ethernet cable.
+
+Watch the progress bar. If it hits "SYSTEMS OK," your hardware and software are verified.
+
+### Testing the "Production" Power
+
+Now, let's verify your USB-C breakout works for the final build:
+
+1. Unplug the ESP32 downloader's USB cable from your computer.
+2. Ensure your USB-C breakout is wired to the 5V and GND rails.
+3. Plug a USB-C cable into the breakout.
+4. The device should spring to life exactly as it did with the downloader.
+
+Press your physical button on IO35. The screen should clear and restart the test sequence.
+
+### Summary Checklist for Success
+
+- Flash Mode: IO0 -> GND + Reset.
+- Run Mode: IO0 -> Disconnected + Reset.
+- Wiring Check: Is the 10k resistor definitely going to 3.3V (not 5V)? IO35 is not 5V tolerant for long periods.
+- Ethernet: Ensure your WT32-ETH01 is getting enough current. If the OLED flickers when Ethernet initializes, your USB port might not be outputting enough milliamps (Ethernet is power-hungry on ESP32).
 
 ## References
 
