@@ -1,0 +1,17 @@
+{
+    "tasks": [
+        {
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "label": "PlatformIO: Build (wt32-eth01)",
+            "problemMatcher": [
+                "$platformio"
+            ],
+            "task": "Build (wt32-eth01)",
+            "type": "PlatformIO"
+        }
+    ],
+    "version": "2.0.0"
+}
