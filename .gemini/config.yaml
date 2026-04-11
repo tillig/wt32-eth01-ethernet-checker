@@ -1,0 +1,4 @@
+project_context:
+  name: "WT32-ETH01 Ethernet Checker"
+  description: "A handheld tool to verify Ethernet link, DHCP, and Ping connectivity."
+  technologies: ["C++", "PlatformIO", "Arduino ESP32", "LwIP"]

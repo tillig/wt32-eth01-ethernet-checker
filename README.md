@@ -1,39 +1,59 @@
-# Ethernet Checker
+# WT32-ETH01 Ethernet Checker
 
-Simple client device using a WT32-ETH01 to check whether a given Ethernet connection is working.
+A standalone tool to verify network connectivity. It checks DHCP, Internet (ICMP), and Web (HTTP) access.
 
-When you plug it in, it will...
+When you plug it in, it will test...
 
-- Get a DHCP connection.
-- Try to get the Google home page.
+- **DHCP:** Verifies network layer and cable integrity.
+- **PING:** Verifies routing to the wider internet.
+- **HTTP:** Verifies that port 80 traffic isn't blocked by firewalls.
 
 If any of those things fail, it'll tell you which one.
-
-I made this because I was trying to troubleshoot my parents' network and, depending on the location, we could _maybe_ get a DHCP connection but not get out of the network; or maybe we wouldn't even get DHCP. It was tiring to lug a laptop around just to try the network so I thought a little checker like this could be handy.
 
 ## Parts
 
 - [WT32-ETH01](https://amzn.to/4bPwoAS) - $17
-- [0.91" I2C IIC 127x32 OLED display](https://amzn.to/3NF82zR) - $12 for 3
+- [0.91" I2C IIC 128x32 OLED display](https://amzn.to/3NF82zR) - $12 for 3
+- [USB 3.1 female breakout board](https://amzn.to/4mrg90i) - $9 for 10
+- [2-pin normally open button](https://amzn.to/4cDuVxz) - $6.50 for 12
+- [10K resistor](https://amzn.to/4svy7jM) - $5.50 for a variety pack of 1000
 
-Prices listed are as of this writing. The point is that, while there are devices that do a far more robust job checking network connectivity, they're usually far more expensive than what I'm interested in paying for this.
+Prices listed are as of this writing. Basically, while there are devices out there that do this same function, they're way more expensive than the parts for this one.
 
-## Programming
+## Hardware Wiring (Production)
 
-I used [this ESP32 downloader kit](https://shop.m5stack.com/products/esp32-downloader-kit).
+| Component    | Pin A    | Pin B   | Notes               |
+| :----------- | :------- | :------ | :------------------ |
+| USB-C Power  | VCC (5V) | 5V Pin  | Main Power          |
+| USB-C Power  | GND      | GND Pin | Ground              |
+| 0.91" OLED   | SDA      | IO33    | I2C Data            |
+| 0.91" OLED   | SCL      | IO32    | I2C Clock           |
+| Button       | Pin      | IO35    | Signal (Active LOW) |
+| 10k Resistor | IO35     | 3V3 Pin | Pull-up Resistor    |
+
+## Hardware Wiring (Programming)
+
+I used [this ESP32 downloader kit from M5Stack](https://shop.m5stack.com/products/esp32-downloader-kit).
 
 Pin connections for USB programmer:
 
-| USB Programmer | WT32-ETH01                 |
-| -------------- | -------------------------- |
-| GND            | GND (fourth down on right) |
-| G0             | IO0 (third down on right)  |
-| EN             | EN (first on left)         |
-| TXD            | RXD (second down on right) |
-| RXD            | TXD (first on left)        |
-| 3.3V           | (10th down on left)        |
+| USB Programmer | WT32-ETH01 |
+| -------------- | ---------- |
+| GND            | GND        |
+| G0             | IO0        |
+| EN             | EN         |
+| TXD            | RXD        |
+| RXD            | TXD        |
+| 3.3V           | 3V3        |
 
-This project is done with [VS Code and PlatformIO](https://docs.platformio.org/en/latest/integration/ide/vscode.html)
+## Programming Instructions
+
+This project is done with [VS Code and PlatformIO](https://docs.platformio.org/en/latest/integration/ide/vscode.html).
+
+1. Set up the ESP32 downloader with your WT32-ETH01.
+2. Connect it via USB to your computer.
+3. Open in VS Code/PlatformIO and click **Upload**.
+4. Remove the downloader and connect the components for standalone USB-C operation.
 
 ## References
 
