@@ -103,21 +103,21 @@ void runEthernetCheck()
 void setup()
 {
   Serial.begin(115200);
-  while (!Serial)
-    ; // Wait for serial monitor to open
-  Serial.println("\n[BOOT] WT32-ETH01 Checker Starting...");
+  delay(500); // Wait for serial monitor to open
+  Serial.println("\n[BOOT] WT32-ETH01 checker starting...");
 
   pinMode(BUTTON_PIN, INPUT); // External 10k Pull-up used
-  Serial.println("[BOOT] GPIO 35 Input Initialized.");
-  Wire.begin(33, 32);
+  Serial.println("[BOOT] GPIO 35 input initialized.");
+  // Wire.begin(SDA, SCL);
+  Wire.begin(14, 15);
 
   if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
   {
-    Serial.println("[WARN] OLED SSD1306 not found at 0x3C. Continuing in Serial-only mode.");
+    Serial.println("[WARN] OLED not found. Check IO14/IO15. Continuing in Serial-only mode.");
   }
   else
   {
-    Serial.println("[INFO] OLED Initialized.");
+    Serial.println("[INFO] OLED initialized.");
   }
 
   Serial.println("[INFO] Starting Ethernet PHY...");
@@ -136,7 +136,7 @@ void loop()
     delay(50); // Debounce
     if (digitalRead(BUTTON_PIN) == LOW)
     {
-      Serial.println("[USER] Button Pressed. Restarting test.");
+      Serial.println("[USER] Button pressed. Restarting test.");
       while (digitalRead(BUTTON_PIN) == LOW)
         ; // Wait for release
       runEthernetCheck();

@@ -6,8 +6,9 @@ This project is an ESP32-based Ethernet testing tool using the WT32-ETH01 board 
 
 - **Board:** WT32-ETH01 (Internal PHY: LAN8720)
 - **Display:** 0.91" I2C OLED (SSD1306, 128x32)
-- **I2C Pins:** SDA (IO33), SCL (IO32)
-- **Input:** Manual Test Button on IO35 (Input-only, external 10k Pull-up to 3.3V)
+- **OLED I2C Pins:** SDA = IO14, SCL = IO15 (Important: IO32/33 are not broken out on this board)
+- **Input Pin:** IO35 (Manual Button, 10k external pull-up to 3.3V)
+- **Ethernet:** LAN8720 (PHY Addr 1, Power Pin 16, MDC 23, MDIO 18)
 - **Power:** Production via USB-C (5V), Programming via M5Stack Downloader.
 
 ## Software Logic Flow

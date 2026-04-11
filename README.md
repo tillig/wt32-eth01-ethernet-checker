@@ -34,14 +34,18 @@ Prices listed are as of this writing. Basically, while there are devices out the
 
 ## Hardware Wiring (Production)
 
-| Component    | Pin A    | Pin B   | Notes               |
-| ------------ | -------- | ------- | ------------------- |
-| USB-C Power  | VCC (5V) | 5V Pin  | Main Power          |
-| USB-C Power  | GND      | GND Pin | Ground              |
-| 0.91" OLED   | SDA      | IO33    | I2C Data            |
-| 0.91" OLED   | SCL      | IO32    | I2C Clock           |
-| Button       | Pin      | IO35    | Signal (Active LOW) |
-| 10k Resistor | IO35     | 3V3 Pin | Pull-up Resistor    |
+| Component      | Component Pin | WT32-ETH01 Pin | Note                                   |
+| -------------- | ------------- | -------------- | -------------------------------------- |
+| OLED           | SDA           | IO14           | Data                                   |
+| OLED           | SCL           | IO15           | Clock                                  |
+| OLED           | VCC           | 3V3            | Power for display                      |
+| OLED           | GND           | GND            | Ground for display                     |
+| Button         | One Pin       | IO35           | Push to reset testing                  |
+| Button         | One Pin       | GND            | Push to reset testing                  |
+| 10k Resistor   | One Pin       | IO35           | Pull-up to keep signal HIGH by default |
+| 10k Resistor   | One Pin       | 3V3            | Pull-up to keep signal HIGH by default |
+| USB-C Breakout | VBUS          | 5V             | Production power input                 |
+| USB-C Breakout | GND           | GND            | Production power input                 |
 
 ## Hardware Wiring (Programming)
 
