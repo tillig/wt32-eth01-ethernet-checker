@@ -94,9 +94,9 @@ Watch the terminal. You should see Writing at 0x00001000... and a percentage cli
 
 ### Transitioning to Testing
 
-The WT32-ETH01 does not have a reset button. To run testing, you will have to cycle power (unplug/plug it back into USB power) or push the button to start the test again.
+The WT32-ETH01 does not have a reset button. To run testing, you will have to cycle power (unplug/plug it back into USB power) or push the button we've added as part of the project to start the test again. Note that with the ESP32 downloader, if you unplug/plug it back in, sometimes it does not allow the Ethernet connectivity to work. You may need to use the PlatformIO "Upload" or "Upload and Monitor" functions to reset things and make it run.
 
-The OLED should light up and display "ETHERNET: Negotiating DHCP..."
+Once started, the OLED should light up and display "ETHERNET: Negotiating DHCP..."
 
 Plug in an Ethernet cable.
 
