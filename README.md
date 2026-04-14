@@ -2,6 +2,8 @@
 
 A standalone tool to verify network connectivity. It checks DHCP, Internet (ICMP), and Web (HTTP) access.
 
+![The checker in action](./assets/img/box-top.jpg)
+
 When you plug it in, it will test...
 
 - **DHCP:** Verifies network layer and cable integrity.
@@ -20,6 +22,7 @@ If any of those things fail, it'll tell you which one.
   - [Transitioning to Testing](#transitioning-to-testing)
   - [Testing the "Production" Power](#testing-the-production-power)
   - [Summary Checklist for Success](#summary-checklist-for-success)
+- [Box](#box)
 - [References](#references)
 
 ## Parts
@@ -119,6 +122,10 @@ Press your physical button on IO35. The screen should clear and restart the test
 - Run Mode: IO0 -> Disconnected + Reset.
 - Wiring Check: Is the 10k resistor definitely going to 3.3V (not 5V)? IO35 is not 5V tolerant for long periods.
 - Ethernet: Ensure your WT32-ETH01 is getting enough current. If the OLED flickers when Ethernet initializes, your USB port might not be outputting enough milliamps (Ethernet is power-hungry on ESP32).
+
+## Box
+
+I [provided the .3mf file and instructions](./assets/box/README.md) for the box I made to hold this. It should work well for you if you used the same parts as I did.
 
 ## References
 
